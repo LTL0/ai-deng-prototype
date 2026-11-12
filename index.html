@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI 台灯运营管理平台交互原型" />
+  <title>AI 台灯运营管理平台</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">跳到主要内容</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="主导航">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M9 23h14M12 27h8M16 4v3M7.5 7.5l2.1 2.1M24.5 7.5l-2.1 2.1M16 9a8 8 0 0 0-5 14h10a8 8 0 0 0-5-14Z"/></svg>
+        </span>
+        <span class="brand-copy">
+          <strong>AI 台灯</strong>
+          <small>运营管理平台</small>
+        </span>
+      </div>
+
+      <nav class="nav-list" id="mainNav">
+        <div class="nav-group">
+        <button class="nav-item active" data-overview-toggle aria-expanded="true" aria-controls="overviewChildren">
+          <span data-icon="dashboard"></span><span>数据总览</span>
+          <span class="nav-overview-chevron" data-icon="chevron" aria-hidden="true"></span>
+        </button>
+          <div class="nav-children" id="overviewChildren" role="group" aria-label="数据总览二级导航">
+        <button class="nav-item nav-subitem active" data-page="dashboard" aria-current="page">
+          <span data-icon="chart"></span><span>数据看板</span>
+        </button>
+        <button class="nav-item nav-subitem" data-page="devices">
+          <span data-icon="device"></span><span>设备管理</span>
+        </button>
+        <button class="nav-item nav-subitem" data-page="users">
+          <span data-icon="users"></span><span>用户管理</span>
+        </button>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-item" data-billing-toggle aria-expanded="false" aria-controls="billingChildren">
+            <span data-icon="wallet"></span><span>计费计量</span>
+            <span class="nav-overview-chevron" data-icon="chevron" aria-hidden="true"></span>
+          </button>
+          <div class="nav-children" id="billingChildren" role="group" aria-label="计费计量二级导航" hidden>
+            <button class="nav-item nav-subitem" data-page="billing"><span data-icon="chart"></span><span>用量/成本</span></button>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-item" data-monitoring-toggle aria-expanded="false" aria-controls="monitoringChildren">
+            <span data-icon="bell"></span><span>监控告警</span>
+            <span class="nav-overview-chevron" data-icon="chevron" aria-hidden="true"></span>
+          </button>
+          <div class="nav-children" id="monitoringChildren" role="group" aria-label="监控告警二级导航" hidden>
+            <button class="nav-item nav-subitem" data-page="alerts-new"><span data-icon="chart"></span><span>服务可用性</span></button>
+            <button class="nav-item nav-subitem" data-page="alerts-traffic"><span data-icon="chart"></span><span>请求量监控</span></button>
+            <button class="nav-item nav-subitem" data-page="alerts-events"><span data-icon="bell"></span><span>告警事件</span></button>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-item" data-models-toggle aria-expanded="false" aria-controls="modelsChildren">
+            <span data-icon="cpu"></span><span>模型管理</span>
+            <span class="nav-overview-chevron" data-icon="chevron" aria-hidden="true"></span>
+          </button>
+          <div class="nav-children" id="modelsChildren" role="group" aria-label="模型管理二级导航" hidden>
+            <button class="nav-item nav-subitem" data-page="billing-models"><span data-icon="cpu"></span><span>模型列表</span></button>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-item" data-entitlements-toggle aria-expanded="false" aria-controls="entitlementsChildren">
+            <span data-icon="wallet"></span><span>权益配置</span>
+            <span class="nav-overview-chevron" data-icon="chevron" aria-hidden="true"></span>
+          </button>
+          <div class="nav-children" id="entitlementsChildren" role="group" aria-label="权益配置二级导航" hidden>
+            <button class="nav-item nav-subitem" data-page="entitlements"><span data-icon="layers"></span><span>权益列表</span></button>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-item" data-feature-management-toggle aria-expanded="false" aria-controls="featureManagementChildren">
+            <span data-icon="layers"></span><span>功能管理</span>
+            <span class="nav-overview-chevron" data-icon="chevron" aria-hidden="true"></span>
+          </button>
+          <div class="nav-children" id="featureManagementChildren" role="group" aria-label="功能管理二级导航" hidden>
+            <button class="nav-item nav-subitem" data-page="feature-dialogue"><span data-icon="spark"></span><span>学伴对话</span></button>
+            <button class="nav-item nav-subitem" data-page="feature-dictionary"><span data-icon="search"></span><span>指尖查词</span></button>
+            <button class="nav-item nav-subitem" data-page="feature-dictation"><span data-icon="book"></span><span>听写练习</span></button>
+            <button class="nav-item nav-subitem" data-page="feature-homework"><span data-icon="clipboard"></span><span>作业批改</span></button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="version">原型版本 V1.0.1</div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button menu-button" id="menuButton" aria-label="展开或收起导航" aria-expanded="false" aria-controls="sidebar"><span data-icon="menu"></span></button>
+          <div class="breadcrumb"><span>AI 台灯</span><span>/</span><strong id="breadcrumbTitle">总览</strong></div>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button notification-button" aria-label="查看告警通知" data-nav-target="alerts-events"><span data-icon="bell"></span><i>3</i></button>
+        </div>
+      </header>
+
+      <main class="main-content" id="mainContent" tabindex="-1">
+        <section class="page active" id="page-dashboard" data-title="数据看板">
+          <div class="page-head">
+            <div><h1>数据看板</h1></div>
+          </div>
+
+          <div class="filter-bar overview-filter" aria-label="总览筛选条件">
+            <div class="overview-date-group">
+              <div class="quick-range" role="group" aria-label="快捷时间范围">
+                <button class="active" type="button" data-range="today" aria-pressed="true">今日</button>
+                <button type="button" data-range="seven" aria-pressed="false">近 7 天</button>
+                <button type="button" data-range="month" aria-pressed="false">本月</button>
+              </div>
+              <div class="date-range"><input id="startDate" type="date" value="2026-09-23" aria-label="开始日期"/><b>至</b><input id="endDate" type="date" value="2026-09-23" aria-label="结束日期"/></div>
+            </div>
+            <button class="button primary compact" id="applyFilter">查询</button>
+            <button class="button ghost compact" id="resetFilter">重置</button>
+          </div>
+
+          <div class="overview-data-layout">
+            <section class="overview-data-section">
+              <div class="overview-section-head"><h2>设备数据</h2><span>近 7 日趋势</span></div>
+              <div class="overview-section-metrics four">
+                <article class="metric-card"><div class="metric-top"><span class="metric-icon blue" data-icon="device"></span><span class="trend up">+4.8%</span></div><p>总设备量</p><div class="metric-value">48,620</div></article>
+                <article class="metric-card"><div class="metric-top"><span class="metric-icon teal" data-icon="spark"></span><span class="trend up">+6.1%</span></div><p>在线设备量</p><div class="metric-value">12,684</div></article>
+                <article class="metric-card"><div class="metric-top"><span class="metric-icon violet" data-icon="plus"></span><span class="trend up">+11.6%</span></div><p>新增设备量</p><div class="metric-value">326</div></article>
+                <article class="metric-card"><div class="metric-top"><span class="metric-icon amber" data-icon="link"></span><span class="trend down">+2.3%</span></div><p>解绑设备量</p><div class="metric-value">42</div></article>
+              </div>
+              <div class="overview-trend-card">
+                <div class="panel-head"><div><h3>设备指标趋势</h3><p>按日展示近 7 天</p></div><div class="chart-legend"><span><i class="legend-line blue-line"></i>总设备量</span><span><i class="legend-line teal-line"></i>在线设备量</span><span><i class="legend-line violet-line"></i>新增设备量</span><span><i class="legend-line amber-line"></i>解绑设备量</span></div></div>
+                <div class="line-chart overview-line-chart" data-overview-chart="device" role="img" aria-label="近七日设备总量、活跃设备、新增设备和解绑设备趋势"><svg viewBox="0 0 760 220" preserveAspectRatio="none"><g class="grid-lines"><line x1="48" y1="20" x2="740" y2="20"/><line x1="48" y1="70" x2="740" y2="70"/><line x1="48" y1="120" x2="740" y2="120"/><line x1="48" y1="170" x2="740" y2="170"/><line x1="48" y1="205" x2="740" y2="205"/></g><line class="y-axis" x1="48" y1="20" x2="48" y2="205"/><g class="y-labels"><text x="40" y="24">50k</text><text x="40" y="74">35k</text><text x="40" y="124">20k</text><text x="40" y="174">5k</text><text x="40" y="209">0</text></g><path class="series-primary" d="M48 58 L160 54 L272 49 L384 44 L496 38 L608 32 L740 28"/><path class="series-secondary" d="M48 168 L160 163 L272 153 L384 141 L496 130 L608 116 L740 108"/><path class="series-tertiary" d="M48 196 L160 193 L272 190 L384 191 L496 184 L608 178 L740 174"/><path class="series-quaternary" d="M48 202 L160 201 L272 201 L384 200 L496 198 L608 199 L740 197"/><g class="x-labels"><text x="48" y="218">09/17</text><text x="160" y="218">09/18</text><text x="272" y="218">09/19</text><text x="384" y="218">09/20</text><text x="496" y="218">09/21</text><text x="608" y="218">09/22</text><text x="712" y="218">09/23</text></g></svg></div>
+              </div>
+            </section>
+
+            <section class="overview-data-section">
+              <div class="overview-section-head"><h2>用户数据</h2><span>近 7 日趋势</span></div>
+        <div class="overview-section-metrics four">
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon blue" data-icon="users"></span><span class="trend up">+7.2%</span></div><p>总用户量</p><div class="metric-value">36,842</div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon teal" data-icon="child"></span><span class="trend up">+9.4%</span></div><p>活跃用户量</p><div class="metric-value">18,642</div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon violet" data-icon="plus"></span><span class="trend up">+6.8%</span></div><p>新增用户数</p><div class="metric-value">268</div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon amber" data-icon="chart"></span><span class="trend up">+12.7%</span></div><p>总访问量</p><div class="metric-value">126,408</div></article>
+              </div>
+              <div class="overview-trend-card">
+              <div class="panel-head"><div><h3>用户指标趋势</h3><p>按日展示近 7 天</p></div><div class="chart-legend"><span><i class="legend-line blue-line"></i>总用户量</span><span><i class="legend-line teal-line"></i>活跃用户量</span><span><i class="legend-line violet-line"></i>新增用户数</span><span><i class="legend-line amber-line"></i>总访问量</span></div></div>
+              <div class="line-chart overview-line-chart" data-overview-chart="user" role="img" aria-label="近七日总用户、活跃用户、新增用户和总访问量趋势"><svg viewBox="0 0 760 220" preserveAspectRatio="none"><g class="grid-lines"><line x1="48" y1="20" x2="740" y2="20"/><line x1="48" y1="70" x2="740" y2="70"/><line x1="48" y1="120" x2="740" y2="120"/><line x1="48" y1="170" x2="740" y2="170"/><line x1="48" y1="205" x2="740" y2="205"/></g><line class="y-axis" x1="48" y1="20" x2="48" y2="205"/><g class="y-labels"><text x="40" y="24">130k</text><text x="40" y="74">90k</text><text x="40" y="124">50k</text><text x="40" y="174">10k</text><text x="40" y="209">0</text></g><path class="series-primary" d="M48 158 L160 151 L272 142 L384 131 L496 119 L608 104 L740 92"/><path class="series-secondary" d="M48 180 L160 174 L272 165 L384 154 L496 143 L608 130 L740 118"/><path class="series-tertiary" d="M48 202 L160 201 L272 200 L384 199 L496 198 L608 197 L740 196"/><path class="series-quaternary" d="M48 172 L160 160 L272 146 L384 127 L496 102 L608 74 L740 48"/><g class="x-labels"><text x="48" y="218">09/17</text><text x="160" y="218">09/18</text><text x="272" y="218">09/19</text><text x="384" y="218">09/20</text><text x="496" y="218">09/21</text><text x="608" y="218">09/22</text><text x="712" y="218">09/23</text></g></svg></div>
+              </div>
+            </section>
+
+            <section class="overview-data-section function-data-section">
+              <div class="overview-section-head"><h2>功能数据</h2><span>近 7 日趋势</span></div>
+              <div class="overview-section-metrics four function-metrics">
+                <article class="function-uv-card feature-card-dialogue"><div class="metric-top"><span class="metric-icon blue" data-icon="spark"></span><span class="trend up">+8.4%</span></div><p>学伴对话 UV</p><div class="feature-uv-value">12,680</div></article>
+                <article class="function-uv-card"><div class="metric-top"><span class="metric-icon teal" data-icon="search"></span><span class="trend up">+6.9%</span></div><p>指尖查词 UV</p><div class="feature-uv-value">9,416</div></article>
+                <article class="function-uv-card"><div class="metric-top"><span class="metric-icon violet" data-icon="book"></span><span class="trend up">+5.2%</span></div><p>听写练习 UV</p><div class="feature-uv-value">7,805</div></article>
+                <article class="function-uv-card"><div class="metric-top"><span class="metric-icon amber" data-icon="clipboard"></span><span class="trend up">+3.7%</span></div><p>作业批改 UV</p><div class="feature-uv-value">5,218</div></article>
+              </div>
+              <div class="overview-function-charts">
+                <section class="overview-trend-card"><div class="panel-head"><div><h3>功能日活趋势</h3><p>近 7 日 · 按日统计</p></div></div><div class="chart-legend feature-chart-legend"><span><i class="legend-line blue-line"></i>学伴对话</span><span><i class="legend-line teal-line"></i>指尖查词</span><span><i class="legend-line violet-line"></i>听写练习</span><span><i class="legend-line amber-line"></i>作业批改</span></div><div class="line-chart overview-line-chart" data-overview-chart="function" role="img" aria-label="近七日四项功能日活趋势"><svg viewBox="0 0 760 220" preserveAspectRatio="none"><g class="grid-lines"><line x1="48" y1="20" x2="740" y2="20"/><line x1="48" y1="70" x2="740" y2="70"/><line x1="48" y1="120" x2="740" y2="120"/><line x1="48" y1="170" x2="740" y2="170"/><line x1="48" y1="205" x2="740" y2="205"/></g><line class="y-axis" x1="48" y1="20" x2="48" y2="205"/><g class="y-labels"><text x="40" y="24">15k</text><text x="40" y="74">10k</text><text x="40" y="124">5k</text><text x="40" y="174">1k</text><text x="40" y="209">0</text></g><path class="series-primary" d="M48 160 L160 147 L272 131 L384 112 L496 89 L608 65 L740 48"/><path class="series-secondary" d="M48 177 L160 166 L272 151 L384 137 L496 119 L608 104 L740 91"/><path class="series-tertiary" d="M48 186 L160 178 L272 166 L384 151 L496 136 L608 122 L740 111"/><path class="series-quaternary" d="M48 195 L160 190 L272 182 L384 173 L496 161 L608 149 L740 140"/><g class="x-labels"><text x="48" y="218">09/17</text><text x="160" y="218">09/18</text><text x="272" y="218">09/19</text><text x="384" y="218">09/20</text><text x="496" y="218">09/21</text><text x="608" y="218">09/22</text><text x="712" y="218">09/23</text></g></svg></div></section>
+              </div>
+            </section>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon blue" data-icon="device"></span><span class="trend up">+8.4%</span></div><p>实时在线设备</p><div class="metric-value">12,684</div></article>
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon teal" data-icon="plus"></span><span class="trend up">+11.6%</span></div><p>新增设备量</p><div class="metric-value">326</div></article>
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon teal" data-icon="child"></span><span class="trend up">+12.1%</span></div><p>日活儿童</p><div class="metric-value">8,926</div></article>
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon violet" data-icon="users"></span><span class="trend up">+5.7%</span></div><p>日活家长</p><div class="metric-value">6,315</div></article>
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon amber" data-icon="spark"></span><span class="trend up">+9.8%</span></div><p>累计调用次数</p><div class="metric-value">314,862</div></article>
+            <article class="metric-card alert-card" data-nav-target="alerts"><div class="metric-top"><span class="metric-icon red" data-icon="alert"></span><span class="trend danger">需处理</span></div><p>活动告警</p><div class="metric-value">3</div></article>
+          </div>
+
+          <section class="panel realtime-overview-panel">
+            <div class="panel-head"><div><h2>各功能调用量</h2></div></div>
+            <div class="realtime-function-grid" aria-label="四项功能实时数据">
+              <article class="realtime-function-card"><div><span class="function-dot dialogue"></span><strong>学伴对话</strong><small>学伴对话</small></div><b>128 <em>次/分</em></b><dl><div><dt>今日累计</dt><dd>18,462</dd></div><div><dt>成功率</dt><dd>96.5%</dd></div></dl></article>
+              <article class="realtime-function-card"><div><span class="function-dot lookup"></span><strong>指尖查词</strong><small>OCR 查询</small></div><b>96 <em>次/分</em></b><dl><div><dt>今日累计</dt><dd>13,208</dd></div><div><dt>成功率</dt><dd>98.7%</dd></div></dl></article>
+              <article class="realtime-function-card"><div><span class="function-dot dictation"></span><strong>听写练习</strong><small>听写练习</small></div><b>74 <em>次/分</em></b><dl><div><dt>今日累计</dt><dd>10,186</dd></div><div><dt>成功率</dt><dd>97.0%</dd></div></dl></article>
+              <article class="realtime-function-card"><div><span class="function-dot homework"></span><strong>作业批改</strong><small>OCR + LLM</small></div><b>38 <em>次/分</em></b><dl><div><dt>今日累计</dt><dd>6,536</dd></div><div><dt>成功率</dt><dd>95.6%</dd></div></dl></article>
+            </div>
+          </section>
+
+          <div class="dashboard-grid">
+            <section class="panel span-2">
+              <div class="panel-head"><div><h2>功能调用趋势</h2><p>近 7 日 · 按日统计</p></div></div>
+              <div class="chart-legend feature-chart-legend"><span><i class="legend-line blue-line"></i>学伴对话</span><span><i class="legend-line teal-line"></i>指尖查词</span><span><i class="legend-line violet-line"></i>听写练习</span><span><i class="legend-line amber-line"></i>作业批改</span></div>
+              <div class="line-chart feature-line-chart" id="featureTrendChart" role="img" aria-label="近七日学伴对话、指尖查词、听写练习与作业批改调用趋势，悬浮可查看每日调用量">
+                <svg viewBox="0 0 760 240" preserveAspectRatio="none">
+                  <g class="grid-lines"><line x1="48" y1="25" x2="740" y2="25"/><line x1="48" y1="75" x2="740" y2="75"/><line x1="48" y1="125" x2="740" y2="125"/><line x1="48" y1="175" x2="740" y2="175"/><line x1="48" y1="220" x2="740" y2="220"/></g>
+                  <line class="y-axis" x1="48" y1="25" x2="48" y2="220"/><g class="y-labels"><text x="40" y="29">20k</text><text x="40" y="79">15k</text><text x="40" y="129">10k</text><text x="40" y="179">5k</text><text x="40" y="224">0</text></g>
+                  <path class="series-primary" d="M48 172 L160 160 L272 143 L384 126 L496 98 L608 70 L740 62"/>
+                  <path class="series-secondary" d="M48 187 L160 178 L272 161 L384 151 L496 128 L608 114 L740 106"/>
+                  <path class="series-tertiary" d="M48 198 L160 190 L272 179 L384 164 L496 148 L608 132 L740 125"/>
+                  <path class="series-quaternary" d="M48 209 L160 205 L272 195 L384 186 L496 176 L608 164 L740 154"/>
+                  <line class="trend-hover-guide" id="trendHoverGuide" x1="48" y1="25" x2="48" y2="220" hidden/>
+                  <rect class="trend-hit-area" x="48" y="25" width="692" height="195" fill="transparent" tabindex="0" aria-label="调用趋势数据，移动鼠标可查看每日明细"/>
+                  <g class="x-labels"><text x="48" y="238">09/17</text><text x="160" y="238">09/18</text><text x="272" y="238">09/19</text><text x="384" y="238">09/20</text><text x="496" y="238">09/21</text><text x="608" y="238">09/22</text><text x="712" y="238">09/23</text></g>
+                </svg>
+                <div class="trend-tooltip" id="trendTooltip" role="status" aria-live="polite" hidden></div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head"><div><h2>功能调用分布</h2><p>近 7 日调用占比</p></div><button class="text-button" data-nav-target="metrics">详情</button></div>
+              <div class="donut-wrap">
+                <div class="donut" aria-label="学伴对话占比 38%"><div><strong>48,392</strong><span>今日调用</span></div></div>
+                <div class="donut-legend">
+                  <div><i class="dot d1"></i><span>学伴对话</span><strong>38%</strong></div>
+                  <div><i class="dot d2"></i><span>指尖查词</span><strong>27%</strong></div>
+                  <div><i class="dot d3"></i><span>听写练习</span><strong>21%</strong></div>
+                  <div><i class="dot d4"></i><span>作业批改</span><strong>14%</strong></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel span-2">
+              <div class="panel-head"><div><h2>AI 能力健康度</h2><p>最近 15 分钟 · 自动刷新</p></div><button class="text-button" data-nav-target="abilities">能力管理</button></div>
+              <div class="health-list">
+                <div class="health-row"><div><span class="status-dot ok"></span><strong>ASR</strong><small>语音识别</small></div><span>99.92%</span><span>P95 480ms</span><div class="spark-bars good"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><b class="status-pill success">正常</b></div>
+                <div class="health-row"><div><span class="status-dot ok"></span><strong>TTS</strong><small>语音合成</small></div><span>99.87%</span><span>P95 620ms</span><div class="spark-bars good"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><b class="status-pill success">正常</b></div>
+                <div class="health-row"><div><span class="status-dot warn"></span><strong>LLM</strong><small>大语言模型</small></div><span>97.43%</span><span>P95 2.8s</span><div class="spark-bars warning"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><b class="status-pill warning">关注</b></div>
+                <div class="health-row"><div><span class="status-dot ok"></span><strong>OCR</strong><small>文字识别</small></div><span>99.31%</span><span>P95 890ms</span><div class="spark-bars good"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><b class="status-pill success">正常</b></div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head"><div><h2>成本进度</h2><p>2026 年 9 月</p></div><button class="text-button" data-nav-target="abilities">成本分析</button></div>
+              <div class="budget-main"><span>本月成本</span><strong>¥ 82,460</strong><small>月度预算 ¥ 120,000</small></div>
+              <div class="progress-line"><i style="width:68.7%"></i></div>
+              <div class="budget-label"><span>已使用 68.7%</span><span>剩余 ¥ 37,540</span></div>
+              <div class="cost-list"><div><span>LLM</span><b>¥ 45,280</b><i style="width:76%"></i></div><div><span>OCR</span><b>¥ 18,640</b><i style="width:42%"></i></div><div><span>ASR / TTS</span><b>¥ 12,970</b><i style="width:31%"></i></div><div><span>其他能力</span><b>¥ 5,570</b><i style="width:18%"></i></div></div>
+            </section>
+          </div>
+
+          <section class="panel table-panel">
+            <div class="panel-head"><div><h2>当前活动告警</h2><p>需要关注的服务异常</p></div><button class="button secondary compact" data-nav-target="alerts">查看全部告警</button></div>
+            <div class="table-wrap"><table><thead><tr><th>等级</th><th>告警名称</th><th>影响范围</th><th>当前值 / 阈值</th><th>持续时间</th><th>状态</th><th>负责人</th></tr></thead><tbody>
+              <tr class="clickable-row" data-drawer="alert"><td><span class="status-pill danger">P1</span></td><td><strong>LLM 业务可用率下降</strong><small>ALR-20260923-018</small></td><td>学伴对话 · 主模型</td><td><b class="negative">94.3%</b> / 97.0%</td><td>12 分钟</td><td><span class="status-pill warning">处理中</span></td><td>算法平台</td></tr>
+              <tr><td><span class="status-pill warning">P2</span></td><td><strong>设备心跳异常率升高</strong><small>ALR-20260923-016</small></td><td>Lamp Pro 1 · v2.3.8</td><td><b>3.8%</b> / 3.0%</td><td>21 分钟</td><td><span class="status-pill info">已确认</span></td><td>设备运维</td></tr>
+              <tr><td><span class="status-pill neutral">P3</span></td><td><strong>作业批改成本速率异常</strong><small>ALR-20260923-012</small></td><td>作业批改 · OCR</td><td><b>¥186/h</b> / ¥150/h</td><td>36 分钟</td><td><span class="status-pill neutral">告警中</span></td><td>运营中心</td></tr>
+            </tbody></table></div>
+          </section>
+        </section>
+
+        <section class="page" id="page-metrics" data-title="运营指标"></section>
+        <section class="page" id="page-billing" data-title="用量/成本"></section>
+        <section class="page" id="page-billing-models" data-title="模型管理"></section>
+        <section class="page" id="page-billing-new" data-title="计费计量（新）"></section>
+        <section class="page" id="page-alerts" data-title="监控告警"></section>
+        <section class="page" id="page-alerts-new" data-title="服务可用性"></section>
+        <section class="page" id="page-alerts-traffic" data-title="请求量监控"></section>
+        <section class="page" id="page-alerts-events" data-title="告警事件"></section>
+        <section class="page" id="page-content" data-title="功能管理"></section>
+        <section class="page" id="page-feature-dialogue" data-title="学伴对话"></section>
+        <section class="page" id="page-feature-dictionary" data-title="指尖查词"></section>
+        <section class="page" id="page-feature-dictation" data-title="听写练习"></section>
+        <section class="page" id="page-feature-homework" data-title="作业批改"></section>
+        <section class="page" id="page-ai-dialogue-detail" data-title="学伴对话详情"></section>
+        <section class="page" id="page-finger-word-detail" data-title="指尖查词详情"></section>
+        <section class="page" id="page-dictation-detail" data-title="听写练习详情"></section>
+        <section class="page" id="page-homework-detail" data-title="作业批改详情"></section>
+        <section class="page" id="page-users" data-title="用户管理"></section>
+        <section class="page" id="page-devices" data-title="设备管理"></section>
+        <section class="page" id="page-homework" data-title="作业管理"></section>
+        <section class="page" id="page-entitlements" data-title="权益列表"></section>
+        <section class="page" id="page-abilities" data-title="AI 能力管理"></section>
+        <section class="page" id="page-data" data-title="数据管理"></section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+  <section class="modal dialogue-chat-modal" id="dialogueChatModal" role="dialog" aria-modal="true" aria-labelledby="dialogueChatTitle" hidden>
+    <div class="modal-head"><div><h2 id="dialogueChatTitle">对话内容</h2><p id="dialogueChatMeta"></p></div><button class="icon-button" type="button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <div class="dialogue-chat-messages" id="dialogueChatMessages" aria-live="polite"></div>
+  </section>
+  <section class="modal" id="alertModal" role="dialog" aria-modal="true" aria-labelledby="alertModalTitle" hidden>
+    <div class="modal-head"><div><h2 id="alertModalTitle">新建告警规则</h2><p>为核心指标设置阈值与通知策略</p></div><button class="icon-button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <form id="alertForm">
+      <div class="form-grid">
+        <label class="span-2"><span>规则名称 *</span><input required placeholder="请输入名称" /></label>
+        <label><span>告警等级 *</span><select required><option>P1 · 严重</option><option>P2 · 重要</option><option>P3 · 提醒</option></select></label>
+        <label><span>监控指标 *</span><input required placeholder="请输入监控指标" /></label>
+        <label><span>比较条件 *</span><select required><option>小于</option><option>大于</option><option>等于</option></select></label>
+        <label><span>阈值 *</span><div class="input-suffix"><input required type="number" value="97" min="0" max="100"/><span>%</span></div></label>
+        <label><span>统计窗口</span><select><option>连续 5 分钟</option><option>连续 10 分钟</option><option>连续 15 分钟</option></select></label>
+        <label class="span-2"><span>影响范围</span><div class="chip-input"><span>学伴对话 <button type="button" aria-label="移除 学伴对话">×</button></span><button type="button">+ 添加</button></div></label>
+        <label class="span-2"><span>通知渠道</span><div class="checkbox-row"><label><input type="checkbox" checked/> 钉钉</label><label><input type="checkbox" checked/> 短信</label><label><input type="checkbox"/> 邮件</label></div></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="button secondary" data-close-modal>取消</button><button type="submit" class="button primary">创建并启用</button></div>
+    </form>
+  </section>
+
+  <section class="modal compact-modal" id="alertEventModal" role="dialog" aria-modal="true" aria-labelledby="alertEventModalTitle" hidden>
+    <div class="modal-head"><div><h2 id="alertEventModalTitle">处理告警事件</h2><p>更新处理状态并记录处理说明</p></div><button class="icon-button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <form id="alertEventForm">
+      <div class="form-grid">
+        <label><span>处理状态 *</span><select id="alertEventStatus" required><option>待处理</option><option>处理中</option><option>已处理</option></select></label>
+        <label class="span-2"><span>处理说明 *</span><textarea id="alertEventNote" rows="4" required placeholder="请输入本次处理说明"></textarea></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="button secondary" data-close-modal>取消</button><button type="submit" class="button primary">确认</button></div>
+    </form>
+  </section>
+
+  <section class="modal" id="contentModal" role="dialog" aria-modal="true" aria-labelledby="contentModalTitle" hidden>
+    <div class="modal-head"><div><h2 id="contentModalTitle">新建配置</h2><p id="contentModalSubtitle">为核心功能新增内容或运行配置</p></div><button class="icon-button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <form id="contentForm">
+      <div class="form-grid">
+        <label class="span-2"><span id="contentNameLabel">配置名称 *</span><input id="contentNameInput" required placeholder="请输入配置名称" /></label>
+        <label><span>配置类型 *</span><select><option>对话策略</option><option>敏感词库</option><option>回复模板</option><option>路由策略</option></select></label>
+        <label><span>适用功能 *</span><select><option>学伴对话</option><option>指尖查词</option><option>听写练习</option><option>作业批改</option></select></label>
+        <label class="span-2"><span>适用设备</span><select><option>全部设备</option><option>Lamp Pro 1</option><option>Lamp Mini</option></select></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="button secondary" data-close-modal>取消</button><button type="submit" class="button primary">创建</button></div>
+    </form>
+  </section>
+
+  <section class="modal role-config-modal" id="roleConfigModal" role="dialog" aria-modal="true" aria-labelledby="roleConfigTitle" hidden>
+    <div class="modal-head role-config-head">
+      <div><h2 id="roleConfigTitle">角色配置</h2><p>配置学伴角色、对话记忆与语音模型</p></div>
+      <button class="icon-button" type="button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button>
+    </div>
+    <form id="roleConfigForm" class="role-config-form">
+      <div class="role-config-columns">
+        <div class="role-config-left">
+          <label><span>助手昵称</span><input value="灵犀台灯" placeholder="请输入助手昵称"></label>
+          <fieldset class="role-template-field"><legend>角色模板</legend><div class="role-template-list"><button type="button" class="active">湾湾小何</button><button type="button">星际游子</button><button type="button">英语老师</button><button type="button">好奇男孩</button><button type="button">汪汪队长</button></div></fieldset>
+          <label><span>角色介绍</span><div class="role-config-textarea-wrap"><textarea rows="7" maxlength="2000">[角色设定]\n你是一个叫{{assistant_name}}的学伴助手，会讲中文和英文，发音标准。回答要求：\n1. 回答简洁明了，优先使用1~3句话。\n2. 直接回答问题，不重复用户内容，不展开无关解释。</textarea><small class="role-config-counter">104/2000</small></div></label>
+          <label><span>记忆</span><div class="role-config-textarea-wrap"><textarea rows="6" maxlength="2000" placeholder="请输入角色记忆">用户对中国传统文化有浓厚兴趣，尤其关注成语文化。曾主动查询“未雨绸缪”的含义及反义词，分享自己学过的成语。根据用户查询天气的地点信息，推测用户位于杭州。</textarea><small class="role-config-counter">289/2000</small></div></label>
+        </div>
+        <div class="role-config-right">
+          <label><span>语音活动检测 (VAD)</span><select><option>语音活动检测</option><option>Silero VAD</option></select></label>
+          <label><span>语音识别 (ASR)</span><select><option>讯飞语音识别(流式)</option><option>Paraformer 流式识别</option></select></label>
+          <label class="role-config-switch-row"><span>客户端实时字幕推送</span><button class="switch-toggle" type="button" role="switch" aria-checked="true" aria-label="客户端实时字幕推送"><span></span></button><span class="role-config-switch-help">默认关闭；开启后，仅支持中间结果的流式 ASR 实时推送字幕。</span></label>
+          <label><span>大语言模型 (LLM)</span><select><option>通义千问</option><option>教育对话主模型</option></select></label>
+          <label><span>视觉大模型 (VLLM)</span><select><option>千问视觉模型</option><option>视觉识别模型</option></select></label>
+          <div class="role-config-memory-row"><label><span>记忆模式</span><select><option>本地短期记忆</option><option>本地向量记忆</option><option>无记忆</option></select></label><div class="role-config-segmented"><button type="button" class="active">上报文字</button><button type="button">上报文字+语音</button></div></div>
+          <label><span>性格</span><select><option>无性格</option><option>亲和陪伴型</option><option>耐心导师型</option></select></label>
+          <label><span>语音合成 (TTS)</span><select><option>CosyVoice3 本地（流式）</option><option>标准语音合成</option></select></label>
+          <label><span>声音音色 (Voice)</span><select><option>当前容器音色（台灯参考）</option><option>温柔女声</option><option>清朗男声</option></select></label>
+        </div>
+      </div>
+    </form>
+    <div class="role-config-footer"><span class="role-config-hint"><span data-icon="info"></span>保存配置后，需要重启设备，新的配置才会生效。</span><button class="button primary compact" type="submit" form="roleConfigForm">保存配置</button><button class="button secondary compact" type="reset" form="roleConfigForm">重置</button></div>
+  </section>
+
+  <section class="modal" id="abilityModal" role="dialog" aria-modal="true" aria-labelledby="abilityModalTitle" hidden>
+    <div class="modal-head"><div><h2 id="abilityModalTitle">新增能力配置</h2><p>配置能力类型、模型及适用业务</p></div><button class="icon-button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <form id="abilityForm">
+      <div class="form-grid">
+        <label><span>能力名称 *</span><select><option>ASR</option><option>TTS</option><option>LLM</option><option>OCR</option></select></label>
+        <label><span>模型名称 *</span><input required placeholder="请输入模型名称" /></label>
+        <label><span>主供应商 *</span><input required placeholder="请输入供应商名称" /></label>
+        <label><span>备用供应商</span><input placeholder="可选" /></label>
+        <label class="span-2"><span>适用业务 *</span><select><option>学伴对话</option><option>指尖查词</option><option>听写练习</option><option>作业批改</option></select></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="button secondary" data-close-modal>取消</button><button type="submit" class="button primary">创建</button></div>
+    </form>
+  </section>
+
+  <section class="modal compact-modal" id="entitlementModal" role="dialog" aria-modal="true" aria-labelledby="entitlementModalTitle" hidden>
+    <div class="modal-head"><div><h2 id="entitlementModalTitle">新建配置</h2><p>为功能配置可使用的权益额度</p></div><button class="icon-button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <form id="entitlementForm">
+      <div class="form-grid">
+        <label class="span-2"><span>权益名称 *</span><input id="entitlementNameInput" required placeholder="请输入权益名称" /></label>
+        <label class="span-2"><span>适用功能 *</span><select id="entitlementFeature" required><option value="" selected disabled>请选择</option><option>学伴对话</option><option>听写练习</option><option>作业批改</option><option>指尖查词</option></select></label>
+        <label><span>额度类型 *</span><select id="entitlementType" required><option value="token">Token</option><option value="times">次数</option></select></label>
+        <label><span>额度周期 *</span><select id="entitlementPeriod" required><option value="" selected disabled>请选择</option><option>每天</option><option>每周</option><option>每月</option><option>每年</option><option>终生</option></select></label>
+        <label class="span-2"><span>额度限制 *</span><div class="input-suffix"><input id="entitlementLimit" required type="number" min="1" step="1" placeholder="请输入额度限制" /><span id="entitlementUnit">Token</span></div></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="button secondary" data-close-modal>取消</button><button type="submit" class="button primary">创建</button></div>
+    </form>
+  </section>
+
+  <section class="modal model-form-modal" id="billingModelFormModal" role="dialog" aria-modal="true" aria-labelledby="billingModelFormTitle" hidden>
+    <div class="modal-head"><div><h2 id="billingModelFormTitle">修改模型</h2></div><button class="icon-button" type="button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <form id="billingModelForm">
+      <input id="billingModelEditId" type="hidden">
+      <div class="model-edit-content">
+        <div class="model-edit-section-head"><h3>模型信息</h3><label class="model-edit-enable"><span>是否启用</span><button class="switch-toggle memory-model-toggle" id="billingModelEnabled" type="button" role="switch" aria-checked="true" aria-label="是否启用"><span></span></button></label></div>
+        <div class="model-edit-grid">
+          <label><span>模型名称</span><input id="billingModelName" placeholder="请输入模型名称"></label>
+          <label><span>模型编码</span><input id="billingModelCode" placeholder="请输入模型编码"></label>
+          <label><span>供应商</span><select id="billingModelProvider"></select></label>
+          <label><span>排序号</span><input id="billingModelSort" type="number" placeholder="请输入排序号"></label>
+          <label class="span-2"><span>文档地址</span><input id="billingModelDocs" type="url" placeholder="请输入文档地址"></label>
+          <label class="span-2"><span>备注</span><textarea id="billingModelRemarks" rows="3" placeholder="请输入备注"></textarea></label>
+        </div>
+        <div class="model-edit-section-head invocation-head"><h3>调用信息</h3></div>
+        <div class="model-edit-grid">
+          <label class="edit-only"><span>WebSocket 地址</span><input id="billingModelWsUrl" placeholder="请输入 WebSocket 地址"></label>
+          <label class="edit-only"><span>API 密钥（可选）</span><div class="secret-input"><input id="billingModelSecret" type="password" placeholder="请输入 API 密钥"><button type="button" aria-label="显示 API 密钥" aria-pressed="false" id="toggleModelSecret"><span data-icon="eye"></span></button></div></label>
+          <label class="edit-only"><span>连接超时（秒）</span><input id="billingModelConnectTimeout" type="number" min="0"></label>
+          <label class="edit-only"><span>最终结果超时（秒）</span><input id="billingModelResultTimeout" type="number" min="0"></label>
+          <label class="edit-only"><span>起音预录帧数</span><input id="billingModelPreRoll" type="number" min="0"></label>
+          <label class="edit-only"><span>输出目录</span><input id="billingModelOutputDir" placeholder="例如 tmp/"></label>
+          <label class="copy-only"><span>API 密钥</span><input id="billingModelCopySecret" type="password" placeholder="请输入 api_key"></label>
+          <label class="copy-only"><span>服务地址</span><input id="billingModelCopyService" placeholder="请输入服务地址"></label>
+          <label class="copy-only"><span>模型名称</span><input id="billingModelInvokeName" placeholder="请输入模型名称"></label>
+          <label class="copy-only"><span>输出目录</span><input id="billingModelCopyOutput" placeholder="例如 tmp/"></label>
+        </div>
+      </div>
+      <div class="modal-actions model-edit-actions"><button type="submit" class="button primary" id="billingModelSubmitLabel">保存</button></div>
+    </form>
+  </section>
+
+  <section class="modal compact-modal model-delete-modal" id="modelDeleteConfirmModal" role="dialog" aria-modal="true" aria-labelledby="modelDeleteConfirmTitle" hidden>
+    <div class="modal-head"><h2 id="modelDeleteConfirmTitle">确认删除</h2><button class="icon-button" type="button" data-close-modal aria-label="关闭"><span data-icon="close"></span></button></div>
+    <div class="mn-dialog-body"><p id="modelDeleteConfirmMessage">确定删除该模型吗？删除后无法恢复。</p></div>
+    <div class="modal-actions"><button class="button secondary" type="button" data-close-modal>取消</button><button class="button primary danger-button" type="button" id="confirmDeleteModelButton">确认删除</button></div>
+  </section>
+
+  <aside class="drawer" id="detailDrawer" aria-labelledby="drawerTitle" hidden>
+    <div class="drawer-head"><div><span class="eyebrow">详情</span><h2 id="drawerTitle">记录详情</h2></div><button class="icon-button" id="closeDrawer" aria-label="关闭详情"><span data-icon="close"></span></button></div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+
+  <dialog class="homework-image-preview" id="homeworkImagePreview" aria-label="作业图片大图预览">
+    <button class="icon-button homework-preview-close" type="button" aria-label="关闭图片预览">×</button>
+    <div class="homework-thumb homework-preview-image" role="img" aria-label="作业图片"><span>作业图片预览</span></div>
+  </dialog>
+
+  <div class="command-palette" id="commandPalette" role="dialog" aria-modal="true" aria-label="全局搜索" hidden>
+    <div class="command-box">
+      <div class="command-input"><span data-icon="search"></span><input id="commandInput" placeholder="输入家长账号、儿童 ID、设备 SN 或作业 ID" aria-label="全局搜索关键词"/><kbd>ESC</kbd></div>
+      <div class="command-content"><p>快速入口</p><button data-nav-target="users"><span data-icon="users"></span><div><strong>查找家长或儿童</strong><small>支持家长账号、儿童 ID</small></div></button><button data-nav-target="devices"><span data-icon="device"></span><div><strong>查找设备</strong><small>支持设备 SN、型号、固件版本</small></div></button><button data-nav-target="homework"><span data-icon="clipboard"></span><div><strong>查找作业</strong><small>支持作业 ID、儿童 ID</small></div></button></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span data-icon="check"></span><span id="toastText">操作成功</span></div>
+
+  <script src="app.js"></script>
+  <script src="monitoring-new.js"></script>
+</body>
+</html>
